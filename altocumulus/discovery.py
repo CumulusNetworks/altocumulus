@@ -14,14 +14,6 @@ class DiscoveryManager(object):
 
         raise DiscoveryError('Could not find host: {}'.format(hostname))
 
-    def find_neighbor_for_interface(self, interface):
-        neighbors = self.fetch_neighbors()
-
-        try:
-            return neighbors[interface]['chassis']
-        except KeyError:
-            pass
-
     def fetch_neighbors(self):
         output = self.shell.call(['lldpcli', 'show', 'neighbors', '-f', 'keyvalue'])
         parsed = parse_lldpd_output(output)
