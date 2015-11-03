@@ -1,6 +1,6 @@
 import json
 
-from oslo.config import cfg
+from oslo_config import cfg
 from oslo_log import log as logging
 import requests
 from requests.exceptions import HTTPError
