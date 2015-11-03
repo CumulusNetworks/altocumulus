@@ -1,3 +1,22 @@
+%define name altocumulus
+%define version 0.1.0.dev21
+%define unmangled_version 0.1.0.dev21
+%define unmangled_version 0.1.0.dev21
+%define release 1
+
+Summary: UNKNOWN
+Name: %{name}
+Version: %{version}
+Release: %{release}
+Source0: %{name}-%{unmangled_version}.tar.gz
+License: UNKNOWN
+Group: Development/Libraries
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Prefix: %{_prefix}
+BuildArch: noarch
+Vendor: Ian Unruh <ianunruh@gmail.com>
+
+%description
 # Altocumulus
 
 **IMPORTANT** This is in development and demo ready.
@@ -78,26 +97,40 @@ iface eth0 inet dhcp
 
 #### Redhat Openstack
 
-The rpm directory to build a rpm package can be built to build the
-``altocumulus-ml2-driver`` package
+```bash
+# yum install git rpm-build
+# ps -ef | grep neutron-server # confirm neutron server is running on this otherwise find the right server
+#  git clone http://github.com/CumulusNetworks/altocumulus
+# cd altocumulus
+# python setup.py bdist_rpm
+# rpm -ivh dist/altocumulus-0.1.0.dev13-1.noarch.rpm
 
-#### Debian based Systems
+```
 
-The debian directory to build a debian package can be built to build the
-``altocumulus-ml2-driver`` package
-
-
-#### Configuration on the network node
-
-* Add `cumulus` to the `mechanism_drivers` field in `/etc/neutron/plugins/ml2/ml2_conf.ini`
-* _Append_ the sample ml2_cumulus_ini in this repo to  `/etc/neutron/plugins/ml2/ml2_conf.ini` on the network node.
+2. Add `cumulus` to the `mechanism_drivers` field in `/etc/neutron/plugins/ml2/ml2_conf.ini`
+3. _Append_ the sample ml2_cumulus_ini in this repo to  `/etc/neutron/plugins/ml2/ml2_conf.ini` on the network node.
 
 ### HTTP API server
 
-The debian directory to build a debian package can be built to build the
-``altocumulus-ml2-switch` package
+A debian package can be build using information included in the debian directory
 
 ## TODO
 
-* Authentication and Secure Communication (SSL) between the Cumulus Switch and
-  Neutron server
+* Authentication and Secure Communication (SSL)
+
+
+
+%prep
+%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+
+%build
+python setup.py build
+
+%install
+python setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f INSTALLED_FILES
+%defattr(-,root,root)

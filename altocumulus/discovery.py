@@ -11,8 +11,14 @@ class DiscoveryManager(object):
         for interface, details in neighbors.iteritems():
             if details['chassis']['name'] == hostname:
                 return interface
-
-        raise DiscoveryError('Could not find host: {}'.format(hostname))
+        # This causes a problem where neutron asks for serverX port
+        # but it doesn't exist. If in a multi-VM bringup, causes neutron
+        # to go nuts so for now just don't do it. If user actually forgot
+        # to enable LLDP on server port. Then, too bad. it never gets provisioned
+        # Better way to handle this problem will be investigated. For now, always
+        # remember to configure LLDP correctly. Suggest even have PTM running
+        # to ensure LLDP is configured correctly
+        # raise DiscoveryError('Could not find host: {}'.format(hostname))
 
     def find_neighbor_for_interface(self, interface):
         neighbors = self.fetch_neighbors()
