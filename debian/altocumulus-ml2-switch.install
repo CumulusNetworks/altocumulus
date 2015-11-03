@@ -1,0 +1,5 @@
+debian/tmp/usr/lib/python2.7/dist-packages/altocumulus/*.py
+debian/tmp/etc/init.d/*
+debian/tmp/etc/altocumulus/*
+debian/tmp/usr/bin/altocumulus-api
+debian/tmp/usr/lib/python2.7/dist-packages/altocumulus*.egg-info/*

@@ -1,0 +1,27 @@
+Source: altocumulus-ml2
+Section: python
+Priority: extra
+Maintainer: Cumulus Networks <ce-ceng@cumulusnetworks.com>
+Build-Depends: debhelper (>= 8.0.0), python-setuptools(>= 0.7), python-dev
+Standards-Version: 3.9.3
+Homepage: http://github.com/CumulusNetworks/altocumulus
+#Vcs-Git: git://git.debian.org/collab-maint/altocumulus-ml2.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/altocumulus-ml2.git;a=summary
+
+Package: altocumulus-ml2-switch
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, python-flask(>= 0.10.1), python-yaml, python-requests(>= 2.0.0)
+Description: REST API Server for Cumulus Switch for Openstack ML2 Plugin
+ This is the REST API for a Cumulus Switch that receives REST calls
+ from Neutron when a network needs to be added or removed.
+ The Rest API currently consists of a Flask application and some code
+ to manage programming vlans and vxlans, depending on the config
+ This is currently experimental code.
+
+Package: altocumulus-ml2-driver
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}
+Description: Mechanism ML2 Driver for Cumulus ML2 Plugin
+ This is installed on the network node where the Neutron server runs.
+ The configuration file located in /etc/neutron/plugins/ml2/ml2_cumulus.ini
+ has sample configs and short help section.

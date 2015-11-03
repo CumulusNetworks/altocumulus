@@ -1,0 +1,29 @@
+altocumulus-ml2 (0.1.0~dev28-3) unstable; urgency=medium
+
+  * add namespace and egg-info files so that entry points can be found
+
+ --  Stanley Karunditu <stanleyk@cumulusnetworks.com> Tue, 29 Sep 2015 16:44:03 +0000
+
+altocumulus-ml2 (0.1.0~dev28-2) unstable; urgency=medium
+
+  * update minimum dependency versions.
+
+ --  Stanley Karunditu <stanleyk@cumulusnetworks.com>  Sat, 19 Sep 2015 04:54:01 +0000
+
+altocumulus-ml2 (0.1.0~dev28-1) unstable; urgency=medium
+
+  * update lldp related problems in flask api.py and discovery.py.
+
+ -- Stanley Karunditu <stanleyk@cumulusnetworks.com>  Sat, 19 Sep 2015 04:23:11 +0000
+
+altocumulus-ml2 (0.1.0~dev24-2) unstable; urgency=medium
+
+  * update debian control to include proper dependencies for the switch stuff.
+
+ -- Cumulus Networks <ce-ceng@cumulusnetworks.com>  Thu, 17 Sep 2015 16:19:55 +0000
+
+altocumulus-ml2 (0.1.0~dev24-1) unstable; urgency=low
+
+  * Initial Debian release
+
+ -- Cumulus Networks <ce-ceng@cumulusnetworks.com>  Wed, 16 Sep 2015 20:10:36 +0000

@@ -62,7 +62,11 @@ def delete_network(network_id):
 
 @app.route('/networks/<network_id>/hosts/<host>', methods=['PUT'])
 def plug_host_into_network(network_id, host):
-    physical_interfaces[host] = physical_interface = dm.find_interface(host)
+    physical_interface = dm.find_interface(host)
+    if not physical_interface:
+        return empty_response()
+
+    physical_interfaces[host] = physical_interface
     vlan_id = networks[network_id]
 
     bridge_name = lbm.get_bridge_name(network_id)
@@ -74,7 +78,10 @@ def plug_host_into_network(network_id, host):
 
 @app.route('/networks/<network_id>/hosts/<host>', methods=['DELETE'])
 def unplug_host_from_network(network_id, host):
-    physical_interface = physical_interfaces[host]
+    physical_interface = physical_interfaces.get(host)
+    if not physical_interface:
+        return empty_response()
+
     vlan_id = networks[network_id]
 
     lbm.delete_vlan(physical_interface, vlan_id)
