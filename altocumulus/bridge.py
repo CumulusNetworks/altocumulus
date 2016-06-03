@@ -28,6 +28,10 @@ VXLAN_NAME_PREFIX = 'vxlan'
 BRIDGE_INTERFACES_FS = '/sys/devices/virtual/net/{}/brif/'
 SUBINTERFACE_NAME = '{}.{}'
 
+#XXX This whole thing should just generate ifupdown2 config file fragment(s)
+#    in /etc/network/interfaces.d (or possibly /tmp/interfaces.d) with their
+#    own "ml2" allow class.  Then ifreload the "ml2" class.  That way we
+#    don't need to write any sync code here for timer-based resyncs.
 class LinuxBridgeManager(object):
     """
     Much of this code is from the Linux Bridge agent for Neutron
